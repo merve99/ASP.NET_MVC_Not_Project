@@ -1,0 +1,74 @@
+﻿@using MyEvernote.Entities
+@using MyEvernote.WebApp
+@using MyEvernote.WebApp.Models
+@model List<Note>
+@{
+    ViewBag.Title = "UserLikes";
+}
+
+<style>
+    .like-count {
+        display: none;
+    }
+</style>
+<div class="products-box">
+    <div class="container">
+        <div class="row special-list">
+            @foreach (var note in Model)
+            {
+                <div class="col-lg-3 col-md-6 special-grid best-seller" data-note-id="@note.Id">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">@note.ModifiedOn.ToString("dd.MM.yy HH:mm")</p>
+                            </div>
+                            <img src="@note.NoteImageFilename" class="img-fluid" alt="Image">
+                            <div class="mask-icon">
+                                <ul>
+                                    @if (CurrentSession.User.Username == note.Owner.Username)
+                                    {
+                                        <li><button  onclick="return confirm('Bu içeriği silmek istediğinizden emin misiniz?');" data-toggle="tooltip" data-placement="right" title="Sil"><i class="fas fa-ban"></i></button></li>
+                                        <li>
+                                            @Bootstrap.LinkButton("/Note/Edit/" + note.Id, "Light", "btn-xs", "Düzenle", "edit", string.Empty)
+                                        </li>
+                                    }
+                                    <li><button data-placement="right" title="Yorumlar" data-toggle="modal" data-target="#modal_comment" data-note-id="@note.Id"><i class="far fa-comment"></i></button></li>
+                                    <li>
+                                        <button title="@note.LikeCount" data-liked="false" data-note-id="@note.Id">
+                                            <span class="fa fa-heart like"></span>
+                                            <span class="like-count">@note.LikeCount</span>
+                                        </button>
+                                    </li>
+                                    <li><button data-placement="right" title="Not Detayı" data-toggle="modal" data-target="#modal_notedetail" data-note-id="@note.Id"><i class="fa fa-eye"></i></button></li>
+                                </ul>
+                                <a class="cart" href="#">@note.Owner.Username</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h3 data-toggle="modal" data-target="#modal_notedetail" data-note-id="@note.Id">@note.Title</h3>
+                            <h4>
+                                @if (string.IsNullOrEmpty(note.Text) == false && note.Text.Length > 30)
+                                {
+                                    <p>@(note.Text.Substring(0, 30) + "...")</p>
+                                }
+                                else
+                                {
+                                    <p>@note.Text</p>
+                                }
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+
+    </div>
+</div>
+@Bootstrap.ModalPopup(id: "modal_comment", title: "Yorumlar")
+@Bootstrap.ModalPopup(id: "modal_notedetail", title: "Not Detayı")
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/comment.js"></script>
+<script src="~/Scripts/like.js"></script>
+<script src="~/Scripts/NoteDetailPopup.js"></script>

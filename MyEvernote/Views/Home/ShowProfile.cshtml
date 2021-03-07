@@ -1,0 +1,50 @@
+﻿@using MyEvernote.WebApp
+@using MyEvernote.Entities
+@using MyEvernote.WebApp.Models
+@model EvernoteUser
+@{
+    ViewBag.Title = "Profiliniz";
+    }
+
+<div class="container">
+    <div class="row">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <img src="~/images/@Model.ProfileImageFilename" class="img-circle" width="128" height="128" />
+        </div>
+        <div class="col-md-10">
+            <h3>@(Model.Name + " " + Model.Surname)</h3>
+            <br />
+            <h5><b>@Html.DisplayNameFor(model => model.Username) : </b>@Model.Username</h5>
+            <h5><b>@Html.DisplayNameFor(model => model.Email) : </b>@Model.Email</h5>
+            <br />
+
+        </div>
+    </div>
+</div>
+<div class="products-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-all text-center">
+                    <h1>Notlarınız & Beğenileriniz</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="special-menu text-center">
+                    <div class="button-group filter-button-group">
+                        <button><a href="/Note/Index">Notlarım</a></button>
+                        <button><a href="/Home/UserLikes/@Model.Id">Beğendiklerim</a></button>
+                        <button><a href="/Home/UserNoteTask/@Model.Id">Taslak Notlarım</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

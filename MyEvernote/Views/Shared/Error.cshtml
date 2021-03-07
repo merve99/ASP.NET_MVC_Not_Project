@@ -1,0 +1,89 @@
+﻿@using MyEvernote.WebApp.ViewModels
+@model OkViewModel
+@{
+    Layout = null;
+    ViewBag.Title = Model.Title;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+    <!-- Title Page-->
+    <title>Au Register Forms by Colorlib</title>
+    <!-- Icons font CSS-->
+    <link href="~/Register/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="~/Register/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <!-- Vendor CSS-->
+    <link href="~/Register/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="~/Register/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+    <!-- Main CSS-->
+    <link href="~/Register/css/main.css" rel="stylesheet" media="all">
+    <style>
+        .validation-summary-errors {
+            color: red;
+            border: 2px dotted #6f1515;
+            border-radius: 8px;
+        }
+
+            .validation-summary-errors ul {
+                list-style-type: none;
+                padding: 10px;
+            }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h2 class="title">&nbsp;&nbsp;&nbsp;@Model.Header</h2>
+                </div>
+                <div class="card-body">
+                    <h2><i class="fa fa-exclamation-triangle fa-2x"></i>&nbsp;&nbsp;&nbsp;@Model.Title</h2>
+                    <h3>
+                        @foreach (string msg in Model.Items)
+                        {
+                            @msg<br>
+                        }
+                    </h3>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Jquery JS-->
+    <script src="~/Register/vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="~/Register/vendor/select2/select2.min.js"></script>
+    <script src="~/Register/vendor/datepicker/moment.min.js"></script>
+    <script src="~/Register/vendor/datepicker/daterangepicker.js"></script>
+    <!-- Main JS-->
+    <script src="~/Register/js/global.js"></script>
+
+    @{
+        string js = string.Empty;
+
+        if (Model.IsRedirecting)
+        {
+            js = "setTimeout(function () { window.location = '" + Model.RedirectingUrl + "'; }, " +
+                Model.RedirectingTimeout + ");";
+        }
+    }
+    <script>
+
+    $(function () {
+        @Html.Raw(js);
+    });
+
+    </script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+<!-- end document-->

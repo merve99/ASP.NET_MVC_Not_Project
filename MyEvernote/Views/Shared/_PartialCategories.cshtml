@@ -1,0 +1,15 @@
+﻿@using MyEvernote.WebApp.Models
+@using MyEvernote.Entities
+@{
+    List<Category> list = CacheHelper.GetCategoriesFromCache();
+}
+
+<li class="dropdown">
+    <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Kategoriler</a>
+    <ul class="dropdown-menu">
+        @foreach (Category cat in list)
+        {
+        <li><a href="/Home/ByCategory/@cat.Id">@cat.Title</a></li>
+        }
+    </ul>
+</li>
